@@ -8,8 +8,7 @@ def home(request):
 
 
 def new_search(request):
-    #search = request.POST.get('search')
-    #print(search)
-    return render(request, template_name='my_app/new_search.html')
-
-
+    search = request.POST.get('search')  # as we have named the placeholder search in newsearch.html
+    print(search)
+    stuff_for_frontend = {'search': search}
+    return render(request, 'my_app/new_search.html', stuff_for_frontend)
