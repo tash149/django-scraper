@@ -8,6 +8,8 @@ def home(request):
 
 
 def new_search(request):
+    #search = request.POST.get('search')
+    #print(search)
     return render(request, template_name='my_app/new_search.html')
 
 
