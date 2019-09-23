@@ -27,16 +27,30 @@ def new_search(request):
     post_listings = soup.find_all('li', {'class': 'result-row'})
     print(post_listings[0])
 
-    post_title = post_listings[0].find('a', {'class': 'result-title'}).text
-    post_url = post_listings[0].find('a').get('href')
-    post_price = post_listings[0].find('a', {'class': 'result-price'}).text
+    # post_title = post_listings[0].find('a', {'class': 'result-title'}).text
+    # post_url = post_listings[0].find('a').get('href')
+    # post_price = post_listings[0].find('a', {'class': 'result-price'}).text
 
-    print('>>>>')
-    print(post_title)
-    print(post_url)
-    print(post_price)
+    # print(post_title)
+    # print(post_url)
+    # print(post_price)
+
+    final_postings = []
+
+    for post in post_listings:
+        post_title = post.find('a', {'class': 'result-title'}).text
+        post_url = post.find('a').get('href')
+        post_price = post.find('a', {'class': 'result-price'}).text
+
+        final_postings.append((post_title, post_url, post_price))
+
 
     # yaha pe baaki sab kuch
-    stuff_for_frontend = {'search': search}
+
+    stuff_for_frontend = {
+        'search': search,
+        'final_postings': final_postings
+    }
+
     return render(request, 'my_app/new_search.html', stuff_for_frontend)
     # print(post_titles[0].get('href')) # post_titles[0].text
