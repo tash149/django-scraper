@@ -25,7 +25,7 @@ def new_search(request):
 
     # post_titles = soup.find_all('a', {'class': 'result-title'})
     post_listings = soup.find_all('li', {'class': 'result-row'})
-    print(post_listings[0])
+    print(post_listings)
 
     # post_title = post_listings[0].find('a', {'class': 'result-title'}).text
     # post_url = post_listings[0].find('a').get('href')
@@ -36,13 +36,27 @@ def new_search(request):
     # print(post_price)
 
     final_postings = []
-
+    print('>>>>>')
     for post in post_listings:
-        post_title = post.find('a', {'class': 'result-title'}).text
+        post_title = post.find(class_='result-title').text
         post_url = post.find('a').get('href')
-        post_price = post.find('a', {'class': 'result-price'}).text
+
+        if post.find(class_='result-price'):
+            post_price = post.find(class_='result-price').text
+        else:
+            post_price = 'N/A'
+
+        print(post_title)
+        print(post_url)
+        print(post_price)
 
         final_postings.append((post_title, post_url, post_price))
+
+        # post_title = post.find('a', {'class': 'result-title'}).text
+        # post_url = post.find('a').get('href')
+        # post_price = post.find('a', {'class': 'result-price'}).text
+
+        # final_postings.append((post_title, post_url, post_price))
 
 
     # yaha pe baaki sab kuch
